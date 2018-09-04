@@ -1,0 +1,97 @@
+<div class="container">
+  <h2>formularios</h2>
+
+  <form [formGroup]="formReactive">
+    <div class="form-group row">
+      <label for="input" class="col-sm-3 col-form-label">Identificación:</label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="id" class="form-control" id="id" placeholder="Identificación">
+      </div>
+    </div>
+
+
+        <div class="form-group row">
+            <label for="input" class="col-sm-3 col-form-label">Nombre:</label>
+            <div class="col-sm-9">
+              <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nombre">
+            </div>
+          </div>
+
+
+
+
+    <div class="form-group row">
+      <label for="input" class="col-sm-3 col-form-label">Correo:</label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="email" class="form-control" id="email" placeholder="Correo">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="input" class="col-sm-3 col-form-label">Telefóno:</label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Telefóno">
+
+        <div *ngIf="formReactive.get('phone').invalid && formReactive.get('phone').touched">
+            <span *ngIf="formReactive.get('phone').hasError('pattern') " class="error-text">
+              patron no esta correcto
+            </span>
+
+            <span *ngIf="formReactive.get('phone').hasError('required') " class="error-text">
+                 requerido
+              </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="input" class="col-sm-3 col-form-label">Nombre Telefóno:</label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="photoName" class="form-control" id="photoName" placeholder="Nombre Telefóno">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-9">
+        <button type="submit" class="btn btn-primary" (click)="setUser()" [disabled]="!formReactive.valid">envia </button>
+      </div>
+      <div class="col-sm-4">
+          <button type="button" class="btn btn-primary" (click)="getUsers()" >listar </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- <div class="alert alert-primary" role="alert">
+  This is a primary alert—check it out!
+</div> -->
+
+  <div> {{formReactive.value | json}}</div>
+
+  <br>
+  <div class="container">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Foto</th>
+          <th scope="col">Nombre Foto</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.photoName}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
